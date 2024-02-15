@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import bugImageUrl from '../../assets/bug.svg'
-import ideaImageUrl from '../../assets/idea.svg'
-import thoughtImageUrl from '../../assets/thought.svg'
+import bugImageUrl from "../../assets/bug.svg";
+import ideaImageUrl from "../../assets/idea.svg";
+import thoughtImageUrl from "../../assets/thought.svg";
 
 import { FeedbackTypeStep } from "./Steps/FeedbackTypeStep";
 import { FeedbackContentStep } from "./Steps/FeedbackContentStep";
@@ -10,52 +10,52 @@ import { FeedbackSuccessStep } from "./Steps/FeedbackSuccessStep";
 
 export const feedbackTypes = {
   BUG: {
-    title: 'Problema',
+    title: "Problema",
     image: {
       url: bugImageUrl,
-      alt: 'Imagem de um inseto'
-    }
+      alt: "Imagem de um inseto",
+    },
   },
   IDEA: {
-    title: 'Ideia',
+    title: "Ideia",
     image: {
       url: ideaImageUrl,
-      alt: 'imagem de uma lâmpada'
-    }
+      alt: "imagem de uma lâmpada",
+    },
   },
   OTHER: {
-    title: 'Outro',
+    title: "Outro",
     image: {
       url: thoughtImageUrl,
-      alt: 'Imagem de uma nuvem'
-    }
-  }
-}
+      alt: "Imagem de uma nuvem",
+    },
+  },
+};
 
-export type FeedbackType = keyof typeof feedbackTypes // a propriedade keyof pera somente os títulos do objeto (BUG, IDEA, OTHER)
+export type FeedbackType = keyof typeof feedbackTypes; // a propriedade keyof pera somente os títulos do objeto (BUG, IDEA, OTHER)
 
 export function WidgetForm() {
-  const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
-  const [feedbackSent, setFeedbackSent] = useState(false)
+  const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null);
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   function handleRestartFeedback() {
-    setFeedbackType(null)
-    setFeedbackSent(false)
+    setFeedbackType(null);
+    setFeedbackSent(false);
   }
 
   return (
     <>
       <div className="bg-zinc-900 relative flex flex-col items-center p-4 mb-4 rounded-2xl shadow-lg w-[calc(100vw-2rem)] md:w-auto">
-        { feedbackSent ? (
-          <FeedbackSuccessStep 
+        {feedbackSent ? (
+          <FeedbackSuccessStep
             onRestartFeedbackRequested={handleRestartFeedback}
           />
         ) : (
           <>
             {!feedbackType ? (
               <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
-            ): (
-              <FeedbackContentStep 
+            ) : (
+              <FeedbackContentStep
                 feedbackType={feedbackType}
                 onFeedbackRestartRequested={handleRestartFeedback}
                 onFeedbackSent={() => setFeedbackSent(true)}
@@ -65,7 +65,13 @@ export function WidgetForm() {
         )}
 
         <footer>
-          Feito com ♥ pela <a className="underline underline-offset-2" href="rocketseat.com.br">Rocketseat</a>
+          Feito por{" "}
+          <a
+            className="underline underline-offset-2"
+            href="https://github.com/Kayquedias"
+          >
+            Kayque Dias
+          </a>
         </footer>
       </div>
     </>
